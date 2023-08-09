@@ -84,22 +84,34 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.bottomCenter,
           child: ElevatedButton(
             onPressed: () {
-              if(int.parse(rowController.text) > 0 && int.parse(columnController.text) > 0)
-              {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
+              if(rowController.text.isNotEmpty && columnController.text.isNotEmpty )
+                {
+                  if(int.parse(rowController.text) > 0 && int.parse(columnController.text) > 0 )
+                  {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
 
-                          WordSearchGame(
-                            numberColumn: int.parse(columnController.text),
-                            numberRows: int.parse(rowController.text),
-                          )),
-                );
-              }
+                              WordSearchGame(
+                                numberColumn: int.parse(columnController.text),
+                                numberRows: int.parse(rowController.text),
+                              )),
+                    );
+                  }
+                }
+              
               else {
-                print("you are sending 0 values");
-                print("you are sending 0 values");
+                ScaffoldMessenger.of(context).showSnackBar(
+
+                  const SnackBar(
+                    backgroundColor: Colors.red,
+                    content: Text('Kindly fill the entries properly'),
+                    duration: Duration(seconds: 3), // Optional duration
+                  ),
+                );
+                // print("you are sending 0 values");
+                // print("you are sending 0 values");
               }
             },
             style: ElevatedButton.styleFrom(
@@ -205,7 +217,7 @@ class _WordSearchGameState extends State<WordSearchGame> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Word Search Example"),
+        title: Text("Word Search"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -263,6 +275,7 @@ class _WordSearchGameState extends State<WordSearchGame> {
                             : Colors.grey.withOpacity(0.3),
                         child: Center(
                             child: TextField(
+                              style: const TextStyle(fontSize: 25, color: Colors.black),
                           onChanged: (value) {
                             setState(() {
                               puzzleGrid[row][col] = value.toUpperCase();
