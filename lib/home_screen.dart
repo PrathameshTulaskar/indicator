@@ -99,8 +99,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               )),
                     );
                   }
+                  else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+
+                      const SnackBar(
+                        backgroundColor: Colors.red,
+                        content: Text("Kindly enter the value's more than 0"),
+                        duration: Duration(seconds: 3), // Optional duration
+                      ),
+                    );
+                    // print("you are sending 0 values");
+                    // print("you are sending 0 values");
+                  }
                 }
-              
+
               else {
                 ScaffoldMessenger.of(context).showSnackBar(
 
